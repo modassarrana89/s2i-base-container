@@ -55,7 +55,7 @@ jobs:
           echo "tag=${_tag}" >> $GITHUB_OUTPUT
 
       - name: Build and push s2i-core to quay.io registry
-        uses: modassarrana89/build-and-push-action@v5.2
+        uses: modassarrana89/build-and-push-action@v5.3
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
@@ -67,7 +67,7 @@ jobs:
           archs: "amd64, s390x"
 
       - name: Build and push s2i-base to quay.io registry
-        uses: modassarrana89/build-and-push-action@v5.2
+        uses: modassarrana89/build-and-push-action@v5.3
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
