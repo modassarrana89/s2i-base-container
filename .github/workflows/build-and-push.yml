@@ -55,7 +55,7 @@ jobs:
           echo "tag=${_tag}" >> $GITHUB_OUTPUT
       
       - name: Check if dockerfile is c9s , then build & push s2i-core for multi-arch
-        if: matrix.dockerfile == "Dockerfile.c9s"
+        if: matrix.dockerfile == 'Dockerfile.c9s'
         uses: modassarrana89/build-and-push-action@v5.4
         with:
           registry: "quay.io"
@@ -68,7 +68,7 @@ jobs:
           archs: "amd64, s390x"
       
       - name: Check if dockerfile is c9s , then build & push s2i-base for multi-arch
-        if: matrix.dockerfile == "Dockerfile.c9s"
+        if: matrix.dockerfile == 'Dockerfile.c9s'
         uses: modassarrana89/build-and-push-action@v5.4
         with:
           registry: "quay.io"
@@ -81,7 +81,7 @@ jobs:
           archs: "amd64, s390x"
 
       - name: if dockerfile is not c9s , Build and push s2i-core to quay.io registry
-        if: matrix.dockerfile != "Dockerfile.c9s"
+        if: matrix.dockerfile != 'Dockerfile.c9s'
         uses: modassarrana89/build-and-push-action@v5.4
         with:
           registry: "quay.io"
@@ -94,7 +94,7 @@ jobs:
 
       - name: if dockerfile is not c9s , Build and push s2i-base to quay.io registry
         uses: modassarrana89/build-and-push-action@v5.4
-        if: matrix.dockerfile != "Dockerfile.c9s"
+        if: matrix.dockerfile != 'Dockerfile.c9s'
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
