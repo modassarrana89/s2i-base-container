@@ -53,9 +53,10 @@ jobs:
             _tag=${{ matrix.tag }}
           fi
           echo "tag=${_tag}" >> $GITHUB_OUTPUT
-
-      - name: Build and push s2i-core to quay.io registry
-        uses: modassarrana89/build-and-push-action@v5.3
+      
+      - name: Check if dockerfile is c9s , then build & push s2i-core for multi-arch
+        if: matrix.dockerfile == "Dockerfile.c9s"
+        uses: modassarrana89/build-and-push-action@v5.4
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
@@ -65,9 +66,10 @@ jobs:
           image_name: "s2i-core${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
           archs: "amd64, s390x"
-
-      - name: Build and push s2i-base to quay.io registry
-        uses: modassarrana89/build-and-push-action@v5.3
+      
+      - name: Check if dockerfile is c9s , then build & push s2i-base for multi-arch
+        if: matrix.dockerfile == "Dockerfile.c9s"
+        uses: modassarrana89/build-and-push-action@v5.4
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
@@ -77,3 +79,27 @@ jobs:
           image_name: "s2i-base${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
           archs: "amd64, s390x"
+
+      - name: if dockerfile is not c9s , Build and push s2i-core to quay.io registry
+        if: matrix.dockerfile != "Dockerfile.c9s"
+        uses: modassarrana89/build-and-push-action@v5.4
+        with:
+          registry: "quay.io"
+          registry_namespace: ${{ matrix.registry_namespace }}
+          registry_username: ${{ secrets[matrix.quayio_username] }}
+          registry_token: ${{ secrets[matrix.quayio_token] }}
+          dockerfile: "core/${{ matrix.dockerfile }}"
+          image_name: "s2i-core${{ matrix.suffix }}"
+          tag: ${{ steps.tag.outputs.tag }}
+
+      - name: if dockerfile is not c9s , Build and push s2i-base to quay.io registry
+        uses: modassarrana89/build-and-push-action@v5.4
+        if: matrix.dockerfile != "Dockerfile.c9s"
+        with:
+          registry: "quay.io"
+          registry_namespace: ${{ matrix.registry_namespace }}
+          registry_username: ${{ secrets[matrix.quayio_username] }}
+          registry_token: ${{ secrets[matrix.quayio_token] }}
+          dockerfile: "base/${{ matrix.dockerfile }}"
+          image_name: "s2i-base${{ matrix.suffix }}"
+          tag: ${{ steps.tag.outputs.tag }}
