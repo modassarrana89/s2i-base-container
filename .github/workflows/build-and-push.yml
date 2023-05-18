@@ -24,10 +24,10 @@ jobs:
             quayio_token: "QUAY_IMAGE_BUILDER_TOKEN"
             suffix: "-centos7"
           - dockerfile: "Dockerfile.c9s"
-            registry_namespace: "sclorg"
+            registry_namespace: "morana"
             tag: "c9s"
-            quayio_username: "QUAY_IMAGE_SCLORG_BUILDER_USERNAME"
-            quayio_token: "QUAY_IMAGE_SCLORG_BUILDER_TOKEN"
+            quayio_username: "morana"
+            quayio_token: "dVRQAGZ241T6hied/bkYGQPc5nWaUoJgLS6J2jwBHFnp047MPb6yVp/QF5retfwWp5CchkYWWf1dXdXzi2fuEQ=="
             suffix: "-c9s"
           - dockerfile: "Dockerfile.c8s"
             registry_namespace: "sclorg"
@@ -67,26 +67,26 @@ jobs:
           tag: ${{ steps.tag.outputs.tag }}
           archs: "amd64, s390x"
 
-      - name: if dockerfile is not c9s , Build and push s2i-core to quay.io registry
-        if: matrix.dockerfile != 'Dockerfile.c9s'
-        uses: modassarrana89/build-and-push-action@v5.5
-        with:
-          registry: "quay.io"
-          registry_namespace: ${{ matrix.registry_namespace }}
-          registry_username: ${{ secrets[matrix.quayio_username] }}
-          registry_token: ${{ secrets[matrix.quayio_token] }}
-          dockerfile: "core/${{ matrix.dockerfile }}"
-          image_name: "s2i-core${{ matrix.suffix }}"
-          tag: ${{ steps.tag.outputs.tag }}
+   #   - name: if dockerfile is not c9s , Build and push s2i-core to quay.io registry
+   #     if: matrix.dockerfile != 'Dockerfile.c9s'
+   #     uses: modassarrana89/build-and-push-action@v5.5
+   #     with:
+   #       registry: "quay.io"
+   #       registry_namespace: ${{ matrix.registry_namespace }}
+   #       registry_username: ${{ secrets[matrix.quayio_username] }}
+   #       registry_token: ${{ secrets[matrix.quayio_token] }}
+   #       dockerfile: "core/${{ matrix.dockerfile }}"
+   #       image_name: "s2i-core${{ matrix.suffix }}"
+   #       tag: ${{ steps.tag.outputs.tag }}
 
-      - name: if dockerfile is not c9s , Build and push s2i-base to quay.io registry
-        uses: modassarrana89/build-and-push-action@v5.5
-        if: matrix.dockerfile != 'Dockerfile.c9s'
-        with:
-          registry: "quay.io"
-          registry_namespace: ${{ matrix.registry_namespace }}
-          registry_username: ${{ secrets[matrix.quayio_username] }}
-          registry_token: ${{ secrets[matrix.quayio_token] }}
-          dockerfile: "base/${{ matrix.dockerfile }}"
-          image_name: "s2i-base${{ matrix.suffix }}"
-          tag: ${{ steps.tag.outputs.tag }}
+   #   - name: if dockerfile is not c9s , Build and push s2i-base to quay.io registry
+   #     uses: modassarrana89/build-and-push-action@v5.5
+   #     if: matrix.dockerfile != 'Dockerfile.c9s'
+   #     with:
+   #       registry: "quay.io"
+   #       registry_namespace: ${{ matrix.registry_namespace }}
+   #       registry_username: ${{ secrets[matrix.quayio_username] }}
+   #       registry_token: ${{ secrets[matrix.quayio_token] }}
+   #       dockerfile: "base/${{ matrix.dockerfile }}"
+   #       image_name: "s2i-base${{ matrix.suffix }}"
+   #       tag: ${{ steps.tag.outputs.tag }}
