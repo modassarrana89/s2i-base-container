@@ -56,7 +56,7 @@ jobs:
       
       - name: Check if dockerfile is c9s , then build & push s2i-core for multi-arch
         if: matrix.dockerfile == 'Dockerfile.c9s'
-        uses: modassarrana89/build-and-push-action@test
+        uses: modassarrana89/build-and-push-action@multi-arch-support
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
@@ -69,7 +69,7 @@ jobs:
 
       - name: if dockerfile is not c9s , Build and push s2i-core to quay.io registry
         if: matrix.dockerfile != 'Dockerfile.c9s'
-        uses: modassarrana89/build-and-push-action@test
+        uses: modassarrana89/build-and-push-action@multi-arch-support
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
@@ -79,9 +79,8 @@ jobs:
           image_name: "s2i-core${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
 
-      - name: if dockerfile is not c9s , Build and push s2i-base to quay.io registry
-        uses: modassarrana89/build-and-push-action@test
-        if: matrix.dockerfile != 'Dockerfile.c9s'
+      - name: Build and push s2i-base to quay.io registry
+        uses: modassarrana89/build-and-push-action@multi-arch-support
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
