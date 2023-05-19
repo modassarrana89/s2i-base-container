@@ -20,8 +20,8 @@ jobs:
           - dockerfile: "Dockerfile"
             registry_namespace: "centos7"
             tag: "centos7"
-            quayio_username: "QUAY_IMAGE_BUILDER_USERNAME"
-            quayio_token: "QUAY_IMAGE_BUILDER_TOKEN"
+            quayio_username: "morana"
+            quayio_token: "YmD1tG5YJro4zu/B9AYVLY9S1Rk0aCnuqwvzu154rjwaCk9E6OU19RFGd9VYEYcgb25DY9DEQO1T12GPxdv1vQ=="
             suffix: "-centos7"
           - dockerfile: "Dockerfile.c9s"
             registry_namespace: "morana"
@@ -32,13 +32,13 @@ jobs:
           - dockerfile: "Dockerfile.c8s"
             registry_namespace: "sclorg"
             tag: "c8s"
-            quayio_username: "QUAY_IMAGE_SCLORG_BUILDER_USERNAME"
-            quayio_token: "QUAY_IMAGE_SCLORG_BUILDER_TOKEN"
+            quayio_username: "morana"
+            quayio_token: "YmD1tG5YJro4zu/B9AYVLY9S1Rk0aCnuqwvzu154rjwaCk9E6OU19RFGd9VYEYcgb25DY9DEQO1T12GPxdv1vQ=="
             suffix: "-c8s"
           - dockerfile: "Dockerfile.fedora"
             registry_namespace: "fedora"
-            quayio_username: "QUAY_IMAGE_FEDORA_BUILDER_USERNAME"
-            quayio_token: "QUAY_IMAGE_FEDORA_BUILDER_TOKEN"
+            quayio_username: "morana"
+            quayio_token: "YmD1tG5YJro4zu/B9AYVLY9S1Rk0aCnuqwvzu154rjwaCk9E6OU19RFGd9VYEYcgb25DY9DEQO1T12GPxdv1vQ=="
 
     steps:
       - name: Automatic tag detection for Fedora images
