@@ -73,8 +73,8 @@ jobs:
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
-          registry_username: ${{ secrets[matrix.quayio_username] }}
-          registry_token: ${{ secrets[matrix.quayio_token] }}
+          registry_username: ${{ matrix.quayio_username }}
+          registry_token: ${{ matrix.quayio_token }}
           dockerfile: "core/${{ matrix.dockerfile }}"
           image_name: "s2i-core${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
@@ -85,8 +85,8 @@ jobs:
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
-          registry_username: ${{ secrets[matrix.quayio_username] }}
-          registry_token: ${{ secrets[matrix.quayio_token] }}
+          registry_username: ${{ matrix.quayio_username }}
+          registry_token: ${{ matrix.quayio_token }}
           dockerfile: "base/${{ matrix.dockerfile }}"
           image_name: "s2i-base${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
