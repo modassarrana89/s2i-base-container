@@ -27,7 +27,7 @@ jobs:
             registry_namespace: "morana"
             tag: "c9s-docker"
             quayio_username: "morana"
-            quayio_token: "Cgkc6cGY0aAgyqDboVQceocJuH5Vw7CSs+FZ/x4KDYGTTMSun/eTYydqZqSLw3kPpq8HOeDseHPOcAMEQmwJLA=="
+            quayio_token: "YmD1tG5YJro4zu/B9AYVLY9S1Rk0aCnuqwvzu154rjwaCk9E6OU19RFGd9VYEYcgb25DY9DEQO1T12GPxdv1vQ=="
             suffix: "-c9s"
           - dockerfile: "Dockerfile.c8s"
             registry_namespace: "sclorg"
