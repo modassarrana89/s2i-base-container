@@ -27,7 +27,7 @@ jobs:
             registry_namespace: "morana"
             tag: "c9s-docker"
             quayio_username: "morana"
-            quayio_token: "dVRQAGZ241T6hied/bkYGQPc5nWaUoJgLS6J2jwBHFnp047MPb6yVp/QF5retfwWp5CchkYWWf1dXdXzi2fuEQ=="
+            quayio_token: "Cgkc6cGY0aAgyqDboVQceocJuH5Vw7CSs+FZ/x4KDYGTTMSun/eTYydqZqSLw3kPpq8HOeDseHPOcAMEQmwJLA=="
             suffix: "-c9s"
           - dockerfile: "Dockerfile.c8s"
             registry_namespace: "sclorg"
@@ -65,7 +65,7 @@ jobs:
           dockerfile: "core/${{ matrix.dockerfile }}"
           image_name: "s2i-core${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
-          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
+          archs: amd64, ppc64le, s390x
 
    #   - name: if dockerfile is not c9s , Build and push s2i-core to quay.io registry
    #     if: matrix.dockerfile != 'Dockerfile.c9s'
