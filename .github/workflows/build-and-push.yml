@@ -77,7 +77,7 @@ jobs:
           registry_token: ${{ matrix.quayio_token }}
           dockerfile: "core/${{ matrix.dockerfile }}"
           image_name: "s2i-core${{ matrix.suffix }}"
-          tag: latest ${{ steps.tag.outputs.tag }}
+          tag: ${{ steps.tag.outputs.tag }}
 
       - name: if dockerfile is not c9s , Build and push s2i-base to quay.io registry
         uses: modassarrana89/build-and-push-action@test
@@ -89,4 +89,4 @@ jobs:
           registry_token: ${{ matrix.quayio_token }}
           dockerfile: "base/${{ matrix.dockerfile }}"
           image_name: "s2i-base${{ matrix.suffix }}"
-          tag: latest ${{ steps.tag.outputs.tag }}
+          tag: ${{ steps.tag.outputs.tag }}
