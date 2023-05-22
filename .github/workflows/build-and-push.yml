@@ -67,7 +67,7 @@ jobs:
           tag: ${{ steps.tag.outputs.tag }}
           archs: ppc64le, s390x
 
-        uses: sclorg/build-and-push-action@v4
+      - uses: sclorg/build-and-push-action@v4
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
