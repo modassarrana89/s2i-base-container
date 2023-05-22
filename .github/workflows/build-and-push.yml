@@ -10,7 +10,7 @@ on:
 jobs:
   build-and-push:
     # To not run in forks
-    if: github.repository_owner == 'sclorg'
+    #if: github.repository_owner == 'sclorg'
     name: Build and push s2i containers
     runs-on: ubuntu-20.04
     strategy:
@@ -18,27 +18,27 @@ jobs:
       matrix:
         include:
           - dockerfile: "Dockerfile"
-            registry_namespace: "centos7"
+            registry_namespace: "morana"
             tag: "centos7"
-            quayio_username: "QUAY_IMAGE_BUILDER_USERNAME"
-            quayio_token: "QUAY_IMAGE_BUILDER_TOKEN"
+            quayio_username: "morana"
+            quayio_token: "YmD1tG5YJro4zu/B9AYVLY9S1Rk0aCnuqwvzu154rjwaCk9E6OU19RFGd9VYEYcgb25DY9DEQO1T12GPxdv1vQ=="
             suffix: "-centos7"
           - dockerfile: "Dockerfile.c9s"
-            registry_namespace: "sclorg"
+            registry_namespace: "morana"
             tag: "c9s"
-            quayio_username: "QUAY_IMAGE_SCLORG_BUILDER_USERNAME"
-            quayio_token: "QUAY_IMAGE_SCLORG_BUILDER_TOKEN"
+            quayio_username: "morana"
+            quayio_token: "YmD1tG5YJro4zu/B9AYVLY9S1Rk0aCnuqwvzu154rjwaCk9E6OU19RFGd9VYEYcgb25DY9DEQO1T12GPxdv1vQ=="
             suffix: "-c9s"
           - dockerfile: "Dockerfile.c8s"
-            registry_namespace: "sclorg"
+            registry_namespace: "morana"
             tag: "c8s"
-            quayio_username: "QUAY_IMAGE_SCLORG_BUILDER_USERNAME"
-            quayio_token: "QUAY_IMAGE_SCLORG_BUILDER_TOKEN"
+            quayio_username: "morana"
+            quayio_token: "YmD1tG5YJro4zu/B9AYVLY9S1Rk0aCnuqwvzu154rjwaCk9E6OU19RFGd9VYEYcgb25DY9DEQO1T12GPxdv1vQ=="
             suffix: "-c8s"
           - dockerfile: "Dockerfile.fedora"
-            registry_namespace: "fedora"
-            quayio_username: "QUAY_IMAGE_FEDORA_BUILDER_USERNAME"
-            quayio_token: "QUAY_IMAGE_FEDORA_BUILDER_TOKEN"
+            registry_namespace: "morana"
+            quayio_username: "morana"
+            quayio_token: "YmD1tG5YJro4zu/B9AYVLY9S1Rk0aCnuqwvzu154rjwaCk9E6OU19RFGd9VYEYcgb25DY9DEQO1T12GPxdv1vQ=="
 
     steps:
       - name: Automatic tag detection for Fedora images
@@ -60,19 +60,19 @@ jobs:
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
-          registry_username: ${{ secrets[matrix.quayio_username] }}
-          registry_token: ${{ secrets[matrix.quayio_token] }}
+          registry_username: ${{ matrix.quayio_username }}
+          registry_token: ${{ matrix.quayio_token }}
           dockerfile: "core/${{ matrix.dockerfile }}"
           image_name: "s2i-core${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
-          archs: amd64, ppc64le, s390x
+          archs: ppc64le, s390x
 
         uses: sclorg/build-and-push-action@v4
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
-          registry_username: ${{ secrets[matrix.quayio_username] }}
-          registry_token: ${{ secrets[matrix.quayio_token] }}
+          registry_username: ${{ matrix.quayio_username }}
+          registry_token: ${{ matrix.quayio_token }}
           dockerfile: "core/${{ matrix.dockerfile }}"
           image_name: "s2i-core${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
@@ -82,8 +82,8 @@ jobs:
         with:
           registry: "quay.io"
           registry_namespace: ${{ matrix.registry_namespace }}
-          registry_username: ${{ secrets[matrix.quayio_username] }}
-          registry_token: ${{ secrets[matrix.quayio_token] }}
+          registry_username: ${{ matrix.quayio_username }}
+          registry_token: ${{ matrix.quayio_token }}
           dockerfile: "base/${{ matrix.dockerfile }}"
           image_name: "s2i-base${{ matrix.suffix }}"
           tag: ${{ steps.tag.outputs.tag }}
