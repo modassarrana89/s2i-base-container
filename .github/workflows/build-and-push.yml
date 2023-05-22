@@ -2,7 +2,7 @@ name: Build and push images to Quay.io registry
 on:
   push:
     branches:
-      - master
+      - test-multi-arch-review-comments
   schedule:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
     # Schedule build to 1:00 each Tuesday
